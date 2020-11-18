@@ -8,8 +8,14 @@ app.set('view engine', 'handlebars');
 app.listen(2000)
 app.use( express.static('public') )
 
-app.get('/:seccion', (req, res) =>{
+app.get('/:seccion?', (req, res) =>{
     const { seccion } = req.params
    
-    res.render('home')
+    const vista = seccion || 'home'
+
+    console.log( vista )
+
+    const titulo = vista.charAt(0).toUpperCase() + vista.slice(1)
+
+    res.render( vista, { titulo } )
 })
